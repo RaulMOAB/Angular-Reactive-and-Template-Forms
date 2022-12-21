@@ -9,7 +9,13 @@ import { User } from '../../models/User';//class user
 })
 export class ReactiveFormComponent implements OnInit{
 
-  data!:string;
+  username!:string;
+  password!:string;
+  repeat_password!:string;
+  email!:string;
+  state!:any;
+  sex!:any;
+  interest!:any;
   civil_status:any = ['Casado/a', 'Soltero/a', 'Divorciado/a']
   information:any  = ['Videojuegos', 'Accesorios', 'Novedades del mercado']
   info!:string;//parametro de onChange que recoge el valor del checkbox
@@ -55,17 +61,30 @@ export class ReactiveFormComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.data = '';
-    this.user = new User()
+    this.username = '';
+    this.password = '';
+    this.email    = '';
+    this.state    = '';
+    this.sex      = '';
+    this.interest = '';
+    this.user=new User();
   }
 
+  
   submit(){
-    this.data = `Nombre de usuario ${this.loginForm.value.username}
-    Email ${this.loginForm.value.email}
-    Estado civil ${this.loginForm.value.civil_status}
-    Genero ${this.loginForm.value.gender}
-    Intereses ${this.info}`;
-    
+
+    // this.user = new User(this.loginForm.value.username,
+    //                       this.loginForm.value.password,
+    //                       this.loginForm.value.repeat_password,
+    //                       this.loginForm.value.email,
+    //                       this.loginForm.value.civil_status,
+    //                       this.loginForm.value.gender,
+    //                       this.info)
+    this.username = `Nombre usuario: ${this.loginForm.value.username}`;
+    this.email    = `Email: ${this.loginForm.value.email}`;
+    this.state    = `Estado civil: ${this.loginForm.value.civil_status}`
+    this.sex      = `${this.loginForm.value.gender}`
+    this.interest = `Intereses: ${this.info}`
   }
 
   onChange(info:string){

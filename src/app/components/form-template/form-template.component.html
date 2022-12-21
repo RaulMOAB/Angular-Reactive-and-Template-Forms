@@ -1,27 +1,43 @@
-<p>form-template works!</p>
 <div class="container">
-    <div class="row">
-        <div class="mx-auto col-8 mt-5">
+  <div class="row">
+    <div class="mx-auto col-8 mt-5">
+          <h1 class="text-center mb-3">Template form</h1>
             <form #formTemplate="ngForm" (ngSubmit)="submit()">
                 <!--Username-->
                 <div class="mb-3">
                     <label for="userName" class="form-label">Nombre usuario</label>
-                    <input type="text" class="form-control" name="userName" #userName="ngModel" [(ngModel)]="username" required>
-                    <!-- <div *ngIf="username.errors?.['required'] && username.dirty">
+                    <input type="text" class="form-control" name="userName" #userName="ngModel" [(ngModel)]="username" required minlength="6" appForbidenNames>
+                    <div *ngIf="userName.errors?.['required'] && userName.touched" class="error">
                       Este campo es obligatorio
-                    </div> -->
+                    </div>
+                    <div *ngIf="userName.errors?.['minlength'] && userName.touched" class="error">
+                      El nombre debe contener al menos 6 carácteres
+                    </div>
+                    <div *ngIf="userName.errors?.['forbidden'] && userName.touched" class="error">
+                      El nombre no debe contener carácteres ofensivos
+                    </div>
                   </div>
                   <!--Password-->
                   <div class="mb-3">
                     <label for="password" class="form-label">Contraseña</label>
-                    <input type="text" class="form-control" name="Password" #Password="ngModel" [(ngModel)]="password" required>
-                    
+                    <input type="text" class="form-control" name="Password" #Password="ngModel" [(ngModel)]="password" required minlength="8">
+                    <div *ngIf="Password.errors?.['required'] && Password.touched" class="error">
+                      Este campo es obligatorio
+                    </div>
+                    <div *ngIf="Password.errors?.['minlength'] && Password.touched" class="error">
+                      La contraseña debe contener al menos 8 carácteres
+                    </div>
                   </div>
                   <!--Repeat Password-->
                   <div class="mb-3">
                     <label for="password" class="form-label">Repetir contraseña</label>
-                    <input type="text" class="form-control" name="repeatPassword" #repeatPassword="ngModel" [(ngModel)]="repeat_password" required>
-                   
+                    <input type="text" class="form-control" name="repeatPassword" #repeatPassword="ngModel" [(ngModel)]="repeat_password" required appConfirmPassword>
+                    <div *ngIf="repeatPassword.errors?.['required'] && repeatPassword.touched" class="error">
+                      Este campo es obligatorio
+                    </div>
+                    <div *ngIf="repeatPassword.errors?.['noMatch'] && repeatPassword?.touched" class="error">
+                      La contraseñas deben coincidir
+                    </div>
                   </div>
                   <!--Email-->
                   <div class="mb-3">
@@ -47,8 +63,8 @@
                   <!--Information-->
                   <h5>Sobre qué quieres recibir información</h5>
                   <div class="form-group mb-3">
-                    <div class="form-check" *ngFor="let info of information">
-                     <input type="checkbox" required [(ngModel)]="information" [value]="info" name="info" #info="ngModel">
+                    <div class="custom-checkbox" *ngFor="let info of information">
+                     <input type="checkbox"  [(ngModel)]="information"  name="info" #info="ngModel">
                      <label class="control-label px-1" for="info"> {{info}}</label>
                     </div>
 

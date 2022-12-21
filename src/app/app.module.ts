@@ -10,6 +10,10 @@ import { ReactiveFormComponent } from './components/reactive-form/reactive-form.
 import { FormTemplateComponent } from './components/form-template/form-template.component';
 import { ConfirmPasswordDirective } from './directives/confirm-password.directive';
 import { ForbidenNamesDirective } from './directives/forbiden-names.directive';
+import { AppRoutingModule } from './app-routing.module';
+import { GenderTranslationPipe } from './pipes/gender-translation.pipe';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +21,16 @@ import { ForbidenNamesDirective } from './directives/forbiden-names.directive';
     ReactiveFormComponent,
     FormTemplateComponent,
     ConfirmPasswordDirective,
-    ForbidenNamesDirective
+    ForbidenNamesDirective,
+    GenderTranslationPipe,
+    PageNotFoundComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

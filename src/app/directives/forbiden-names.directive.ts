@@ -11,6 +11,8 @@ import { Validator, NG_VALIDATORS, AbstractControl, ValidationErrors, ValidatorF
     }
   ]
 })
+
+//Esta currada vale por 2 directivas (Susana)
 export class ForbidenNamesDirective implements Validator{
 
   constructor() { }
@@ -20,8 +22,7 @@ export class ForbidenNamesDirective implements Validator{
     let forbiden_words:any = [/caca/i, /pedo/i, /culo/i, /pis/i];
    
     for (let index = 0; index < forbiden_words.length; index++) {
-      if (control.value.match(forbiden_words[index])) {
-        console.log('ofensivo');
+      if (control.value && control.value.match(forbiden_words[index])) {
         return { 'forbidden': true }
       }     
     }
