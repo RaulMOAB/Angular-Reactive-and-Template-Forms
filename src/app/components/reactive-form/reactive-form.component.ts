@@ -9,6 +9,7 @@ import { User } from '../../models/User';//class user
 })
 export class ReactiveFormComponent implements OnInit{
 
+  user!:User;
   username!:string;
   password!:string;
   repeat_password!:string;
@@ -21,7 +22,6 @@ export class ReactiveFormComponent implements OnInit{
   info!:string;//parametro de onChange que recoge el valor del checkbox
   selectedCheckbox:any = [];//checkboxes seleccionados
   gender:any       = ['Hombre', 'Mujer', 'Otros']
-  user!:User;
 
   loginForm = new FormGroup({
     username: new FormControl('',
@@ -46,7 +46,10 @@ export class ReactiveFormComponent implements OnInit{
       Validators.required,
       Validators.email,
     ]),
-    civil_status: new FormControl(''),
+    civil_status: new FormControl('',
+    [
+    Validators.required
+    ]),
     gender: new FormControl('',
     [
       Validators.required
@@ -67,7 +70,6 @@ export class ReactiveFormComponent implements OnInit{
     this.state    = '';
     this.sex      = '';
     this.interest = '';
-    this.user=new User();
   }
 
   
@@ -80,11 +82,16 @@ export class ReactiveFormComponent implements OnInit{
     //                       this.loginForm.value.civil_status,
     //                       this.loginForm.value.gender,
     //                       this.info)
+
+    //this.user = new User(this.loginForm.value.username,this.loginForm.value.email, this.loginForm.value.civil_status, this.loginForm.value.gender, this.info);                  
+    
     this.username = `Nombre usuario: ${this.loginForm.value.username}`;
     this.email    = `Email: ${this.loginForm.value.email}`;
     this.state    = `Estado civil: ${this.loginForm.value.civil_status}`
     this.sex      = `${this.loginForm.value.gender}`
     this.interest = `Intereses: ${this.info}`
+
+    
   }
 
   onChange(info:string){

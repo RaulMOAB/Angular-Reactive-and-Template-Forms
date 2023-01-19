@@ -17,9 +17,7 @@ export class ConfirmPasswordDirective implements Validator{
   constructor() { }
 
 
-  validate(control: AbstractControl): ValidationErrors | null {
-   
-   
+  validate(control: AbstractControl): ValidationErrors | null {  
     if (control && control.value && control.value != this.param) {
       return {'noMatch': true}
     }else{

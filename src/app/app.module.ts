@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ReactiveFormComponent } from './components/reactive-form/reactive-form.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { FormTemplateComponent } from './components/form-template/form-template.component';
 import { ConfirmPasswordDirective } from './directives/confirm-password.directive';
@@ -14,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { GenderTranslationPipe } from './pipes/gender-translation.pipe';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { DataComponent } from './components/data/data.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +26,15 @@ import { UserListComponent } from './components/user-list/user-list.component';
     ForbidenNamesDirective,
     GenderTranslationPipe,
     PageNotFoundComponent,
-    UserListComponent
+    UserListComponent,
+    DataComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

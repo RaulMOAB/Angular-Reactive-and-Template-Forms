@@ -62,6 +62,9 @@
                   <select name="civil_status" class="form-select" id="civil_status" formControlName="civil_status">
                     <option value={{i}} *ngFor="let status of civil_status; let i=index" [ngValue]="status">{{status}}</option>
                   </select>
+                  <div *ngIf="this.loginForm.get('civil_status')?.errors?.['civil_status'] && this.loginForm.get('civil_status')?.touched" class="error">
+                    Este campo es obligatorio
+                  </div>
                 </div>
                 <!--Gender-->
                 <div class="form-check mb-3">

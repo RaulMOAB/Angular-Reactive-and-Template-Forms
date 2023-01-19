@@ -16,9 +16,9 @@
                     <div *ngIf="userName.errors?.['forbidden'] && userName.touched" class="error">
                       El nombre no debe contener carácteres ofensivos
                     </div>
-                  </div>
+                </div>
                   <!--Password-->
-                  <div class="mb-3">
+                <div class="mb-3">
                     <label for="password" class="form-label">Contraseña</label>
                     <input type="text" class="form-control" name="Password" #Password="ngModel" [(ngModel)]="password" required minlength="8">
                     <div *ngIf="Password.errors?.['required'] && Password.touched" class="error">
@@ -27,61 +27,73 @@
                     <div *ngIf="Password.errors?.['minlength'] && Password.touched" class="error">
                       La contraseña debe contener al menos 8 carácteres
                     </div>
-                  </div>
+                </div>
                   <!--Repeat Password-->
-                  <div class="mb-3">
+                <div class="mb-3">
                     <label for="password" class="form-label">Repetir contraseña</label>
-                    <input type="text" class="form-control" name="repeatPassword" #repeatPassword="ngModel" [(ngModel)]="repeat_password" required appConfirmPassword>
+                    <input type="text" class="form-control" name="repeatPassword" #repeatPassword="ngModel" [(ngModel)]="repeat_password" required appConfirmPassword [param]="password">
                     <div *ngIf="repeatPassword.errors?.['required'] && repeatPassword.touched" class="error">
                       Este campo es obligatorio
                     </div>
                     <div *ngIf="repeatPassword.errors?.['noMatch'] && repeatPassword?.touched" class="error">
                       La contraseñas deben coincidir
                     </div>
-                  </div>
+                </div>
                   <!--Email-->
-                  <div class="mb-3">
+                <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" name="Email" #Email="ngModel" [(ngModel)]="email" required>
-                    
-                  </div>
+                    <div *ngIf="Email.errors?.['required'] && Email?.touched" class="error">
+                      Este campo es obligatorio
+                    </div>
+                </div>
                   <!--Civil state-->
-                  <div class="mb-3">
+                <div class="mb-3">
                     <label for="state" class="form-label">Estado civil</label>
-                    <select class="form-select" id="state" required [(ngModel)]="civil_state" name="state" #state="ngModel" >                     
-                      <option *ngFor="let state of civil_state" [value]="state">{{state}}</option>
+                    <select class="form-select" id="state"  [(ngModel)]="status" name="state" #state="ngModel" required>                     
+                      <option *ngFor="let state of civil_state">{{state}}</option>
                     </select> 
-                  </div>
+                    
+                </div>
                   <!--Gender-->
-                  <div class="form-group mb-3">
+                <div class="form-group mb-3">
                     <div><label>Sexo</label></div>
-                    <div class="custom-control custom-radio custom-control-inline" *ngFor="let sex of gender">
-                      <input type="radio" [(ngModel)]="gender" [value]="sex" name="sex">
+                    <div class="custom-control custom-radio custom-control-inline" *ngFor="let sex of gender" required>
+                      <input type="radio" [(ngModel)]="sex_selected" [value]="sex" name="sex">
                       <label class="custom-control-label px-1" for="sex">{{sex}}</label>
                     </div>
-                  </div>          
-                  <!--Information-->
-                  <h5>Sobre qué quieres recibir información</h5>
-                  <div class="form-group mb-3">
-                    <div class="custom-checkbox" *ngFor="let info of information">
-                     <input type="checkbox"  [(ngModel)]="information"  name="info" #info="ngModel">
-                     <label class="control-label px-1" for="info"> {{info}}</label>
+                    <div *ngIf="sex_selected.errors?.['required'] && sex_selected.touched" class="error">
+                      Este campo es obligatorio
                     </div>
-
-                  </div>
+                </div>          
+                  <!--Information-->
+                <h5>Sobre qué quieres recibir información</h5>
+                <div class="form-group mb-3">                   
+                    <div class="custom-checkbox" *ngFor="let info of information;">
+                      <input type="checkbox"  [value]="info" (change)="onChange(info)" name="info" >
+                      <label class="control-label px-1" for="info"> {{info}}</label>
+                     </div>
+                </div>
                   <!--Accept conditions-->
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" value="accept_conditions">
+                <div class="form-check mb-3">
+                    <input class="form-check-input"[(ngModel)]="accept_condition" type="checkbox" value="accept_conditions" required>
                     <label class="form-check-label" for="flexCheckDefault">
                      Acceptar condiciones
                     </label>
-                  </div>
+                    <div *ngIf="accept_condition.errors?.['required'] && accept_condition.touched" class="error">
+                      Este campo es obligatorio
+                    </div>
+                </div>
                 <div>
-                    <button type="submit" class="btn btn-primary" [disabled]="formTemplate.invalid">Submit</button>
+                    <button type="submit" class="btn btn-primary mb-3" [disabled]="formTemplate.invalid">Submit</button>
                 </div>
             </form>
            <div class="data">
-            
+            <!-- <p>Nombre usuario: {{data_username}}</p>
+            <p>Email: {{data_email}}</p>
+            <p>Estado civil: {{data_status}}</p>
+            <p>Sexo: {{data_gender}}</p>
+            <p>Intereses: {{info}}</p> -->
            </div>
         </div>
     </div>

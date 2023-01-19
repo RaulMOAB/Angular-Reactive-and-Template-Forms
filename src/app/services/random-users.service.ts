@@ -6,9 +6,10 @@ import { Injectable } from '@angular/core';
 export class RandomUsersService {
 
   constructor() { }
-  createusers():string[] {
+
+  createusers():object[] {
    const max_users:number = 30;
-   let users:string[] = [];
+   let users:object[] = [];
    const username: string[] = ['Marquez',
     'Shakayla', 
     'Alize' ,
@@ -71,10 +72,10 @@ export class RandomUsersService {
     'Arthur@gmail.com', 
     'Fred@gmail.com' ]
 
-    for (let i: number = 0; i < max_users; i++) {
+    for (let i: number = 0; i < 200; i++) {
       let random_num = Math.floor(Math.random() * max_users);
-      users.push(username[random_num], email[random_num]);
-      console.log(users);
+      users.push({username: username[random_num], email: email[random_num]})
+      //console.table(users.username);
       
     }
    
